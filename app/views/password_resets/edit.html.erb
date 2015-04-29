@@ -1,0 +1,27 @@
+<% provide(:title, 'Reset password') %>
+<h1>Reset password</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <!-- Since @user already exists, the method will be patch -->
+    <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+        <!-- This is how the application knows which user this is for. -->
+      <%= hidden_field_tag :email, @user.email %>
+
+        <!-- Label for the password input -->
+      <%= f.label :password %>
+        <!-- Password input. You have to use the :password_field method, because Rails can't otherwise know that this
+        is a password. -->
+      <%= f.password_field :password, class: 'form-control' %>
+
+        <!-- Label for the :password_confirmation field. The second argument is the text that will actually be
+        displayed. -->
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      
+      <%= f.submit "Update password", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

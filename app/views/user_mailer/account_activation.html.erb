@@ -1,0 +1,13 @@
+<h1>Sample App</h1>
+
+<p>Hi <%= @user.name %>,</p>
+
+<p>
+Welcome to the Sample App! Click on the link below to activate your account:
+</p>
+
+<!--Use the named url helper, since this link will be in an external email (not an internal HTML page)-->
+<!--The email parameter becomes a named parameter. Since this is a link, and therefore a GET request, 'email' becomes a
+query parameter.-->
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token, 
+                                                    email: @user.email) %>
